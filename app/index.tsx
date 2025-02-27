@@ -1,4 +1,4 @@
-import {  View,StyleSheet,TextInput } from "react-native"; // Use this for standard components
+import {  View,StyleSheet,TextInput,ScrollView } from "react-native"; // Use this for standard components
 import { theme } from "../constants/theme";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
@@ -41,18 +41,24 @@ export default function HomeScreen() {
     
   return (
     <>
-        <View style={styles.container}>
-              <TextInput 
-              style={styles.textInput} placeholder="Enter new  todo"
-               onChangeText={handleChange} returnKeyType="done" onSubmitEditing={handleSubmit} value={todo}/>
-               {todoList.map((currentTodo,index)=>(
-                <TodoItem key={index} 
-                todoValue={currentTodo.todoValue}
-                isCompleted={currentTodo.isCompleted}
-                markComplete={()=> handlTodoCompleted(index)}
-                />
-               ))}
-        </View>
+        <ScrollView 
+            style={styles.container}
+            contentContainerStyle={{paddingBottom:16,justifyContent:"center"}}
+            stickyHeaderIndices={[0]}
+        >
+            <View style={styles.container}>
+                <TextInput 
+                style={styles.textInput} placeholder="Enter new  todo"
+                onChangeText={handleChange} returnKeyType="done" onSubmitEditing={handleSubmit} value={todo}/>
+                {todoList.map((currentTodo,index)=>(
+                    <TodoItem key={index} 
+                    todoValue={currentTodo.todoValue}
+                    isCompleted={currentTodo.isCompleted}
+                    markComplete={()=> handlTodoCompleted(index)}
+                    />
+                ))}
+            </View>
+        </ScrollView>
        
 
     </>
@@ -61,7 +67,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
     container :{
-        justifyContent:"center",
+        
         backgroundColor:theme.colorWhite,
         flex:1 //this will make the full screen to the container
     },

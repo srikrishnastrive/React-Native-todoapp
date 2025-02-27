@@ -1,4 +1,4 @@
-import { Text, View,StyleSheet,TouchableOpacity, Alert,TextInput } from "react-native"; // Use this for standard components
+import { Text, View,StyleSheet,TouchableOpacity, Alert,TextInput, } from "react-native"; // Use this for standard components
 import { theme } from "../constants/theme";
 
 
@@ -28,7 +28,7 @@ export default function TodoItem({todoValue,isCompleted,markComplete}:TodoItemPr
     }
 
   return (
-   
+       
         <View style={styles.todoContainer}>
           
         <Text style={[styles.todoText,isCompleted ? styles.textCompleted : undefined]}>{todoValue}</Text>
