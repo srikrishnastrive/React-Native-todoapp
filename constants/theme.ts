@@ -4,4 +4,5 @@ export const theme = {
     black:'#000000',
     red:'#ff0000',
     lightRed:"#ff4d4d",
+    lightGrey:'#808080'
 }

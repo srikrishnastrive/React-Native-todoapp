@@ -1,55 +1,78 @@
-import { Text, View,StyleSheet,TouchableOpacity } from "react-native"; // Use this for standard components
-import { theme } from "./theme";
+import {  View,StyleSheet,TextInput } from "react-native"; // Use this for standard components
+import { theme } from "../constants/theme";
+import TodoItem from "./TodoItem";
+import { useState } from "react";
 
-
+type TodoItem = {
+    todoValue : string,
+    isCompleted?:boolean
+}
 
 export default function HomeScreen() {
-    function handlePress(){
-        
+    const [todo,setTodo] = useState('');
+    const [todoList,setTodoList] = useState<TodoItem[]>([]);
+    function handleChange(data:string){
+       setTodo(data);
+    }
+    function handleSubmit(){
+        console.log("submitted todo",todo);
+        setTodoList([
+            ...todoList,
+            {
+                todoValue:todo,
+                isCompleted:false,
+            }
+        ]);
+        setTodo('');
     }
 
+    function handlTodoCompleted(todoIndex:number){
+        const newTodoList = todoList.map((currentTodo,index)=>{
+            if (index === todoIndex){
+                return {
+                    ...currentTodo,
+                    isCompleted:!currentTodo.isCompleted
+                }
+            }
+            return currentTodo;
+        });
+        setTodoList(newTodoList);
+    }
+    
   return (
-   <View style={styles.parentContainer}>
-         <View style={styles.todoContainer}>
-        <Text style={styles.todoText}>Hello world</Text>
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
-            <Text style={styles.buttonText}>Delete todo</Text>
-        </TouchableOpacity>
+    <>
+        <View style={styles.container}>
+              <TextInput 
+              style={styles.textInput} placeholder="Enter new  todo"
+               onChangeText={handleChange} returnKeyType="done" onSubmitEditing={handleSubmit} value={todo}/>
+               {todoList.map((currentTodo,index)=>(
+                <TodoItem key={index} 
+                todoValue={currentTodo.todoValue}
+                isCompleted={currentTodo.isCompleted}
+                markComplete={()=> handlTodoCompleted(index)}
+                />
+               ))}
         </View>
-   </View>
+       
+
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-    parentContainer :{
+    container :{
         justifyContent:"center",
         backgroundColor:theme.colorWhite,
         flex:1 //this will make the full screen to the container
     },
-    todoContainer : {
-        paddingVertical:20,
-        paddingHorizontal:10,
-        borderBottomWidth:1,
-        borderBottomColor:theme.lightBlue,
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:'center'
-        
-    },
-    todoText:{
-        fontSize:20,
-        fontWeight:"bold"
-    },
-    button:{
-        borderRadius:5,
-        padding:8,
-        backgroundColor:theme.lightRed,
-    },
-    buttonText:{
-        color:theme.colorWhite,
-        textAlign:"center",
-        fontWeight:"bold",
-        letterSpacing:1.2,
-        textTransform:"uppercase"
+    textInput : {
+        borderWidth:1,
+        borderColor:theme.lightBlue,
+        margin:10,
+        padding:10,
+        borderRadius:50,
+        marginHorizontal:10,
+        fontSize:20
     }
+    
 })
