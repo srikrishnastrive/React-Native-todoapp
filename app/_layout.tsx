@@ -8,7 +8,7 @@ export default function Layout(){
             <Stack.Screen name="index" options={{title:'Todo List'}}/>
             <Stack.Screen name="sample" options={{title:'Sample',animation:"slide_from_bottom"}} 
             />
-            <Stack.Screen name="counter" options={{title:'counter',animation:"fade_from_bottom"}}/>
+            <Stack.Screen name="(custom)/counter" options={{title:'counter',animation:"fade_from_bottom"}}/>
         </Stack>
     )    
 }

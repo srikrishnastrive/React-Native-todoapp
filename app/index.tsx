@@ -48,7 +48,7 @@ export default function HomeScreen() {
             stickyHeaderIndices={[0]}
         >
             <Link href={"/sample"} style={styles.link}>Go to Sample page</Link>
-            <Link href={"/counter"} style={styles.link}>Go to Counter page</Link>
+            <Link href={"/(custom)/counter"} style={styles.link}>Go to Counter page</Link>
             <View style={styles.container}>
                 <TextInput 
                 style={styles.textInput} placeholder="Enter new  todo"
