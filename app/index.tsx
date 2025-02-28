@@ -1,7 +1,8 @@
 import {  View,StyleSheet,TextInput,ScrollView } from "react-native"; // Use this for standard components
 import { theme } from "../constants/theme";
-import TodoItem from "./TodoItem";
+import TodoItem from "../components/ui/TodoItem";
 import { useState } from "react";
+import { Link,useRouter } from "expo-router";
 
 type TodoItem = {
     todoValue : string,
@@ -46,6 +47,8 @@ export default function HomeScreen() {
             contentContainerStyle={{paddingBottom:16,justifyContent:"center"}}
             stickyHeaderIndices={[0]}
         >
+            <Link href={"/sample"} style={styles.link}>Go to Sample page</Link>
+            <Link href={"/counter"} style={styles.link}>Go to Counter page</Link>
             <View style={styles.container}>
                 <TextInput 
                 style={styles.textInput} placeholder="Enter new  todo"
@@ -79,6 +82,16 @@ const styles = StyleSheet.create({
         borderRadius:50,
         marginHorizontal:10,
         fontSize:20
+    },
+    link:{
+        color:theme.lightBlue,
+        fontSize:20,
+        textAlign:'center',
+        padding:10,
+        backgroundColor:theme.colorWhite,
+        margin:10,
+        borderRadius:50
+
     }
     
 })

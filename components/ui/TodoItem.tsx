@@ -1,5 +1,5 @@
 import { Text, View,StyleSheet,TouchableOpacity, Alert,TextInput, } from "react-native"; // Use this for standard components
-import { theme } from "../constants/theme";
+import { theme } from "../../constants/theme";
 
 
 
